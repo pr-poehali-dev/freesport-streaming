@@ -145,10 +145,17 @@ const Index = () => {
     
     if (newStreamUrl.includes('youtube.com/watch')) {
       const videoId = newStreamUrl.split('v=')[1]?.split('&')[0];
-      embedUrl = `https://www.youtube.com/embed/${videoId}`;
+      embedUrl = `https://www.youtube.com/embed/${videoId}?modestbranding=1&rel=0&showinfo=0&iv_load_policy=3&fs=1&autoplay=1&mute=1&controls=1`;
     } else if (newStreamUrl.includes('youtu.be/')) {
       const videoId = newStreamUrl.split('youtu.be/')[1]?.split('?')[0];
-      embedUrl = `https://www.youtube.com/embed/${videoId}`;
+      embedUrl = `https://www.youtube.com/embed/${videoId}?modestbranding=1&rel=0&showinfo=0&iv_load_policy=3&fs=1&autoplay=1&mute=1&controls=1`;
+    } else if (newStreamUrl.includes('twitch.tv/')) {
+      const channelName = newStreamUrl.split('twitch.tv/')[1]?.split('?')[0].split('/')[0];
+      embedUrl = `https://player.twitch.tv/?channel=${channelName}&parent=${window.location.hostname}&muted=false&autoplay=true`;
+    } else if (newStreamUrl.includes('player.twitch.tv')) {
+      if (!newStreamUrl.includes('parent=')) {
+        embedUrl = `${newStreamUrl}${newStreamUrl.includes('?') ? '&' : '?'}parent=${window.location.hostname}&muted=false&autoplay=true`;
+      }
     }
 
     try {
