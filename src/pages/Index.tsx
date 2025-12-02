@@ -170,9 +170,7 @@ const Index = () => {
       const channelName = newStreamUrl.split('kick.com/')[1]?.split('?')[0].split('/')[0];
       embedUrl = `https://player.kick.com/${channelName}?autoplay=true&muted=false&quality=auto`;
     } else if (newStreamUrl.includes('tach.id/')) {
-      const parts = newStreamUrl.split('/');
-      const streamId = parts[parts.length - 1];
-      embedUrl = `https://player.tach.id/${streamId}`;
+      embedUrl = newStreamUrl;
     }
 
     try {
