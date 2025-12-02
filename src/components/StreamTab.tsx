@@ -74,11 +74,6 @@ const StreamTab = ({ currentStream }: StreamTabProps) => {
           referrerPolicy="no-referrer"
           title="Live Stream Player"
         ></iframe>
-        
-        <div 
-          className="absolute top-0 left-0 w-80 h-24 z-20 bg-black"
-          style={{ pointerEvents: 'none' }}
-        ></div>
 
         <style dangerouslySetInnerHTML={{__html: `
           iframe {
