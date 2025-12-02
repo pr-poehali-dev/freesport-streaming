@@ -169,6 +169,10 @@ const Index = () => {
     } else if (newStreamUrl.includes('kick.com/')) {
       const channelName = newStreamUrl.split('kick.com/')[1]?.split('?')[0].split('/')[0];
       embedUrl = `https://player.kick.com/${channelName}?autoplay=true&muted=false&quality=auto`;
+    } else if (newStreamUrl.includes('tach.id/')) {
+      const streamId = newStreamUrl.split('/').pop();
+      const username = newStreamUrl.split('/s/')[1]?.split('/')[0];
+      embedUrl = `https://tach.id/embed/${username}/${streamId}?autoplay=1`;
     }
 
     try {
