@@ -84,6 +84,11 @@ const StreamTab = ({ currentStream }: StreamTabProps) => {
           onContextMenu={handleContextMenu}
         ></div>
 
+        <div 
+          className="absolute bottom-0 left-0 w-32 h-12 z-20 bg-black"
+          style={{ pointerEvents: 'none' }}
+        ></div>
+
         <style dangerouslySetInnerHTML={{__html: `
           iframe {
             pointer-events: auto !important;
@@ -112,6 +117,13 @@ const StreamTab = ({ currentStream }: StreamTabProps) => {
               height: 100% !important;
               border-radius: 0 !important;
             }
+          }
+          div:fullscreen .bg-transparent,
+          div:-webkit-full-screen .bg-transparent,
+          div:-moz-full-screen .bg-transparent,
+          div:-ms-fullscreen .bg-transparent {
+            height: 100% !important;
+            pointer-events: auto !important;
           }
         `}} />
       </div>
