@@ -75,9 +75,19 @@ const StreamTab = ({ currentStream }: StreamTabProps) => {
           title="Live Stream Player"
         ></iframe>
 
+        <div 
+          className="absolute top-0 left-0 w-full h-full z-20"
+          style={{ 
+            pointerEvents: 'auto',
+            background: 'transparent'
+          }}
+          onContextMenu={handleContextMenu}
+          onClick={(e) => e.stopPropagation()}
+        ></div>
+
         <style dangerouslySetInnerHTML={{__html: `
           iframe {
-            pointer-events: auto !important;
+            pointer-events: none !important;
           }
           @media (max-width: 768px) {
             div:fullscreen,
