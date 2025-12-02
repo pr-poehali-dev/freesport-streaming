@@ -172,13 +172,7 @@ const Index = () => {
     } else if (newStreamUrl.includes('tach.id/')) {
       const parts = newStreamUrl.split('/');
       const streamId = parts[parts.length - 1];
-      const username = newStreamUrl.includes('/s/') ? newStreamUrl.split('/s/')[1].split('/')[0] : '';
-      
-      if (username) {
-        embedUrl = `https://tach.id/embed/${username}/${streamId}`;
-      } else {
-        embedUrl = newStreamUrl;
-      }
+      embedUrl = `https://player.tach.id/${streamId}`;
     }
 
     try {
