@@ -1,5 +1,7 @@
+import { useRef } from 'react';
 import { Card, CardContent } from '@/components/ui/card';
 import { Badge } from '@/components/ui/badge';
+import { Button } from '@/components/ui/button';
 import Icon from '@/components/ui/icon';
 
 interface Stream {
@@ -17,14 +19,32 @@ interface StreamTabProps {
 const StreamTab = ({ currentStream }: StreamTabProps) => {
   if (!currentStream) return null;
 
+  const containerRef = useRef<HTMLDivElement>(null);
+
   const handleContextMenu = (e: React.MouseEvent) => {
     e.preventDefault();
     return false;
   };
 
+  const handleFullscreen = () => {
+    const container = containerRef.current;
+    if (!container) return;
+
+    if (container.requestFullscreen) {
+      container.requestFullscreen();
+    } else if ((container as any).webkitRequestFullscreen) {
+      (container as any).webkitRequestFullscreen();
+    } else if ((container as any).mozRequestFullScreen) {
+      (container as any).mozRequestFullScreen();
+    } else if ((container as any).msRequestFullscreen) {
+      (container as any).msRequestFullscreen();
+    }
+  };
+
   return (
     <div className="space-y-8 animate-fade-in">
       <div 
+        ref={containerRef}
         className="relative w-full aspect-video bg-black rounded-lg overflow-hidden shadow-2xl"
         onContextMenu={handleContextMenu}
         style={{ userSelect: 'none', WebkitUserSelect: 'none', msUserSelect: 'none' }}
@@ -35,6 +55,15 @@ const StreamTab = ({ currentStream }: StreamTabProps) => {
             LIVE
           </Badge>
         )}
+
+        <Button 
+          variant="secondary" 
+          size="icon" 
+          className="absolute top-4 right-4 z-10 bg-black/70 hover:bg-black/90 text-white border-0 md:hidden"
+          onClick={handleFullscreen}
+        >
+          <Icon name="Maximize" size={18} />
+        </Button>
         
         <iframe
           src={currentStream.url}
@@ -47,11 +76,35 @@ const StreamTab = ({ currentStream }: StreamTabProps) => {
         ></iframe>
         
         <div 
+          className="absolute top-0 right-0 w-40 h-20 z-20 bg-black"
+          style={{ pointerEvents: 'none' }}
+        ></div>
+
+        <div 
           className="absolute inset-0 pointer-events-none"
           style={{ 
             background: 'linear-gradient(to bottom, transparent 0%, transparent 85%, rgba(0,0,0,0.3) 100%)'
           }}
         ></div>
+
+        <style dangerouslySetInnerHTML={{__html: `
+          @media (max-width: 768px) {
+            div:fullscreen,
+            div:-webkit-full-screen,
+            div:-moz-full-screen {
+              width: 100vw !important;
+              height: 100vh !important;
+              border-radius: 0 !important;
+            }
+            div:fullscreen iframe,
+            div:-webkit-full-screen iframe,
+            div:-moz-full-screen iframe {
+              width: 100% !important;
+              height: 100% !important;
+              border-radius: 0 !important;
+            }
+          }
+        `}} />
       </div>
 
       <Card>

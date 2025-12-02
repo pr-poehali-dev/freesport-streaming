@@ -168,7 +168,7 @@ const Index = () => {
       embedUrl = `https://ok.ru/videoembed/${videoId}?autoplay=1`;
     } else if (newStreamUrl.includes('kick.com/')) {
       const channelName = newStreamUrl.split('kick.com/')[1]?.split('?')[0].split('/')[0];
-      embedUrl = `https://player.kick.com/${channelName}?autoplay=true&muted=false`;
+      embedUrl = `https://player.kick.com/${channelName}?autoplay=true&muted=false&quality=auto`;
     }
 
     try {
