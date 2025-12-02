@@ -76,8 +76,9 @@ const StreamTab = ({ currentStream }: StreamTabProps) => {
         ></iframe>
 
         <div 
-          className="absolute top-0 left-0 w-full h-full z-20"
+          className="absolute top-0 left-0 w-full z-20"
           style={{ 
+            height: 'calc(100% - 30px)',
             pointerEvents: 'auto',
             background: 'transparent'
           }}
@@ -87,7 +88,7 @@ const StreamTab = ({ currentStream }: StreamTabProps) => {
 
         <style dangerouslySetInnerHTML={{__html: `
           iframe {
-            pointer-events: none !important;
+            pointer-events: auto !important;
           }
           @media (max-width: 768px) {
             div:fullscreen,
