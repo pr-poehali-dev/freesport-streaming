@@ -76,18 +76,30 @@ const StreamTab = ({ currentStream }: StreamTabProps) => {
           onContextMenu={(e: any) => e.preventDefault()}
         ></iframe>
 
+        {currentStream.url.includes('tach.id') && (
+          <>
+            <div 
+              className="absolute top-0 left-0 right-0 h-16 z-20 bg-black"
+              style={{ pointerEvents: 'none' }}
+            ></div>
+            <div 
+              className="absolute bottom-0 left-0 w-48 h-20 z-20 bg-black"
+              style={{ pointerEvents: 'none' }}
+            ></div>
+            <div 
+              className="absolute top-16 left-0 w-64 bottom-20 z-20 bg-black"
+              style={{ pointerEvents: 'none' }}
+            ></div>
+            <div 
+              className="absolute top-16 right-0 w-80 bottom-20 z-20 bg-black"
+              style={{ pointerEvents: 'none' }}
+            ></div>
+          </>
+        )}
+
         <style dangerouslySetInnerHTML={{__html: `
           iframe {
             pointer-events: auto !important;
-          }
-          iframe::before {
-            content: '';
-            position: absolute;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            z-index: 1;
           }
           @media (max-width: 768px) {
             div:fullscreen,
