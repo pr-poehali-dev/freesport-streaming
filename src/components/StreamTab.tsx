@@ -30,20 +30,19 @@ const StreamTab = ({ currentStream }: StreamTabProps) => {
         <iframe
           src={currentStream.url}
           className="w-full h-full"
-          allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+          allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; fullscreen"
           allowFullScreen
           sandbox="allow-same-origin allow-scripts allow-presentation allow-forms"
           referrerPolicy="no-referrer"
-          style={{ pointerEvents: 'auto' }}
+          title="Live Stream Player"
         ></iframe>
-        <style dangerouslySetInnerHTML={{__html: `
-          iframe {
-            pointer-events: auto !important;
-          }
-          iframe a {
-            pointer-events: none !important;
-          }
-        `}} />
+        
+        <div 
+          className="absolute inset-0 pointer-events-none"
+          style={{ 
+            background: 'linear-gradient(to bottom, transparent 0%, transparent 85%, rgba(0,0,0,0.3) 100%)'
+          }}
+        ></div>
       </div>
 
       <Card>

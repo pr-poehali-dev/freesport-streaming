@@ -191,9 +191,6 @@ const Index = () => {
       
       const data = await response.json();
       setCurrentStream(data.stream);
-      setNewStreamUrl('');
-      setNewStreamTitle('');
-      setNewStreamSport('');
       toast({ title: 'Успешно', description: 'Трансляция обновлена' });
     } catch (error) {
       toast({ title: 'Ошибка', description: 'Не удалось обновить трансляцию', variant: 'destructive' });
