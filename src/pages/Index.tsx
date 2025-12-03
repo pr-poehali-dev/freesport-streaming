@@ -158,6 +158,12 @@ const Index = () => {
       if (!newStreamUrl.includes('parent=')) {
         embedUrl = `${newStreamUrl}${newStreamUrl.includes('?') ? '&' : '?'}parent=${window.location.hostname}&autoplay=true&muted=false`;
       }
+    } else if (newStreamUrl.includes('goodgame.ru/')) {
+      const channelMatch = newStreamUrl.match(/goodgame\.ru\/([^/?]+)/);
+      if (channelMatch) {
+        const channelName = channelMatch[1];
+        embedUrl = `https://goodgame.ru/player?${channelName}`;
+      }
     } else if (newStreamUrl.includes('vk.com/video') || newStreamUrl.includes('vk.ru/video')) {
       const videoMatch = newStreamUrl.match(/video(-?\d+_\d+)/);
       if (videoMatch) {
