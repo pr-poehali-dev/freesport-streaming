@@ -26,51 +26,7 @@ const StreamTab = ({ currentStream }: StreamTabProps) => {
     return false;
   };
 
-  const handleFullscreen = () => {
-    const container = containerRef.current;
-    if (!container) return;
 
-    const iframe = container.querySelector('iframe');
-    if (!iframe) return;
-
-    const isIOS = /iPad|iPhone|iPod/.test(navigator.userAgent);
-    const isSafari = /^((?!chrome|android).)*safari/i.test(navigator.userAgent);
-
-    if (isIOS || isSafari) {
-      try {
-        const videoElements = iframe.contentWindow?.document?.querySelectorAll('video');
-        if (videoElements && videoElements.length > 0) {
-          const video = videoElements[0] as any;
-          if (video.webkitEnterFullscreen) {
-            video.webkitEnterFullscreen();
-            return;
-          }
-          if (video.webkitRequestFullscreen) {
-            video.webkitRequestFullscreen();
-            return;
-          }
-        }
-      } catch (e) {
-        console.log('Cross-origin iframe access restricted');
-      }
-    }
-
-    if (iframe.requestFullscreen) {
-      iframe.requestFullscreen();
-    } else if ((iframe as any).webkitRequestFullscreen) {
-      (iframe as any).webkitRequestFullscreen();
-    } else if ((iframe as any).webkitEnterFullscreen) {
-      (iframe as any).webkitEnterFullscreen();
-    } else if ((iframe as any).mozRequestFullScreen) {
-      (iframe as any).mozRequestFullScreen();
-    } else if ((iframe as any).msRequestFullscreen) {
-      (iframe as any).msRequestFullscreen();
-    } else if (container.requestFullscreen) {
-      container.requestFullscreen();
-    } else if ((container as any).webkitRequestFullscreen) {
-      (container as any).webkitRequestFullscreen();
-    }
-  };
 
   return (
     <div className="space-y-8 animate-fade-in">
@@ -87,14 +43,7 @@ const StreamTab = ({ currentStream }: StreamTabProps) => {
           </Badge>
         )}
 
-        <Button 
-          variant="secondary" 
-          size="icon" 
-          className="absolute top-4 right-4 z-10 bg-black/70 hover:bg-black/90 text-white border-0 md:hidden"
-          onClick={handleFullscreen}
-        >
-          <Icon name="Maximize" size={18} />
-        </Button>
+
         
         <iframe
           src={currentStream.url}
