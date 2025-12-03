@@ -50,8 +50,6 @@ const StreamTab = ({ currentStream }: StreamTabProps) => {
           className="w-full h-full"
           allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; fullscreen"
           allowFullScreen
-          sandbox="allow-same-origin allow-scripts allow-presentation allow-forms allow-popups allow-popups-to-escape-sandbox"
-          referrerPolicy="no-referrer"
           title="Live Stream Player"
           onContextMenu={(e: any) => e.preventDefault()}
         ></iframe>
